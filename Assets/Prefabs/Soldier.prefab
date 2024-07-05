@@ -624,6 +624,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: a22fa7aa8af31e745ad26fdcf4732a6a, type: 2}
+    - target: {fileID: 9500000, guid: c6acf3f29c109e4439950c8f6a85cb2b, type: 3}
+      propertyPath: m_UpdateMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -650,7 +654,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -674,3 +678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3412914cc216bfd49a12aa0463af8490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  hp: 0
+  hpMax: 100
+  hpBarPrefab: {fileID: 8303650781089406864, guid: 3ac962e2b21148d46abe4c4d8931618a, type: 3}

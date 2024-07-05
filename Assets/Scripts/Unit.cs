@@ -6,18 +6,27 @@ using UnityEngine.AI;
 public class Unit : MonoBehaviour
 {
     const string animatorSpeed = "Speed",
-    animateorAlive = "Alive",
+    animatorAlive = "Alive",
     animatorAttack = "Attack";
+
+    public float healthPercent { get { return hp / hpMax; } }
 
     public Transform target;
     NavMeshAgent nav;
     Animator animator;
+
+    [SerializeField]
+    private float hp, hpMax = 100;
+    [SerializeField]
+    GameObject hpBarPrefab;
 
 
     void Awake()
     {
         nav = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        hp = hpMax;
+        Instantiate(hpBarPrefab, transform);
     }
 
 
@@ -38,5 +47,6 @@ public class Unit : MonoBehaviour
         speedVector.y = 0;
         float speed = speedVector.magnitude;
         animator.SetFloat(animatorSpeed, speed);
+        animator.SetBool(animatorAlive, hp > 0);
     }
 }
