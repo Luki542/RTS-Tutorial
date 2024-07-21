@@ -110,6 +110,10 @@ public class CameraController : MonoBehaviour
             selectionBox.sizeDelta = boxRect.size;
             UpdateSelecting();
         }
+        if (Input.GetMouseButtonDown(1))
+        {
+            GiveCommands();
+        }
     }
 
     Rect AbsRect(Rect rect)
@@ -149,5 +153,35 @@ public class CameraController : MonoBehaviour
                 selectedUnits.Add(unit);
             }
         }
+    }
+
+    Ray ray;
+    RaycastHit hit;
+    [SerializeField]
+    LayerMask commandLayerMask = -1;
+
+    void GiveCommands()
+    {
+        ray = camera.ViewportPointToRay(mousePosScreen);
+        if(Physics.Raycast(ray, out hit, 1000, commandLayerMask))
+        {
+            object commandData = null;
+            if(hit.collider is TerrainCollider)
+            {
+                commandData = hit.point;
+            }
+            else
+            {
+                commandData = hit.collider.gameObject.GetComponent<Unit>();
+            }
+            GiveCommands(commandData);
+        }
+        
+    }
+
+    void GiveCommands(object dataCoomand)
+    {
+        foreach (Unit unit in selectedUnits)
+            unit.SendMessage("Command", dataCoomand, SendMessageOptions.DontRequireReceiver);
     }
 }
